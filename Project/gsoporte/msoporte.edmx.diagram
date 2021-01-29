@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e26e2d77e66f4c6f93099e2a454dd751" Name="Diagram1">
+        <EntityTypeShape EntityType="soporteModel.clasificacion" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="soporteModel.estado" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="soporteModel.perfil" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="soporteModel.prioridad" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="soporteModel.soporte" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="soporteModel.usuario" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+        <AssociationConnector Association="soporteModel.FK_soporte_clasificacion" ManuallyRouted="false" />
+        <AssociationConnector Association="soporteModel.FK_soporte_estado" ManuallyRouted="false" />
+        <AssociationConnector Association="soporteModel.FK_soporte_perfil" ManuallyRouted="false" />
+        <AssociationConnector Association="soporteModel.FK_soporte_prioridad" ManuallyRouted="false" />
+        <AssociationConnector Association="soporteModel.FK_soporte_usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

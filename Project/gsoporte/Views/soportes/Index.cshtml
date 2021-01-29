@@ -1,0 +1,86 @@
+﻿@model IEnumerable<gsoporte.soporte>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado Soporte</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Asunto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraSoporte)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.clasificacion.Clasificacion1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado.Estado1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.perfil.Perfil1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prioridad.Prioridad1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usuario.Usuario1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asunto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraSoporte)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.clasificacion.Clasificacion1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado.Estado1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.perfil.Perfil1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prioridad.Prioridad1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usuario.Usuario1)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.idSoporte }) |
+            @Html.ActionLink("Borrar", "Delete", new { id=item.idSoporte })
+        </td>
+    </tr>
+}
+
+</table>

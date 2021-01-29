@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="soporteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="clasificacion">
+          <Key>
+            <PropertyRef Name="idClasificacion" />
+          </Key>
+          <Property Name="idClasificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Clasificacion" Type="varchar" MaxLength="100" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="perfil">
+          <Key>
+            <PropertyRef Name="idPerfil" />
+          </Key>
+          <Property Name="idPerfil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Perfil" Type="varchar" MaxLength="50" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="prioridad">
+          <Key>
+            <PropertyRef Name="idPrioridad" />
+          </Key>
+          <Property Name="idPrioridad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prioridad" Type="varchar" MaxLength="50" />
+          <Property Name="ValorPrioridad" Type="int" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="soporte">
+          <Key>
+            <PropertyRef Name="idSoporte" />
+          </Key>
+          <Property Name="idSoporte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPerfil" Type="int" />
+          <Property Name="idUsuario" Type="int" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="idClasificacion" Type="int" />
+          <Property Name="idPrioridad" Type="int" />
+          <Property Name="Asunto" Type="varchar" MaxLength="150" />
+          <Property Name="HoraSoporte" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="idEstado" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="150" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <Association Name="FK_soporte_clasificacion">
+          <End Role="clasificacion" Type="Self.clasificacion" Multiplicity="0..1" />
+          <End Role="soporte" Type="Self.soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clasificacion">
+              <PropertyRef Name="idClasificacion" />
+            </Principal>
+            <Dependent Role="soporte">
+              <PropertyRef Name="idClasificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soporte_estado">
+          <End Role="estado" Type="Self.estado" Multiplicity="0..1" />
+          <End Role="soporte" Type="Self.soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="soporte">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soporte_perfil">
+          <End Role="perfil" Type="Self.perfil" Multiplicity="0..1" />
+          <End Role="soporte" Type="Self.soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perfil">
+              <PropertyRef Name="idPerfil" />
+            </Principal>
+            <Dependent Role="soporte">
+              <PropertyRef Name="idPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soporte_prioridad">
+          <End Role="prioridad" Type="Self.prioridad" Multiplicity="0..1" />
+          <End Role="soporte" Type="Self.soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="prioridad">
+              <PropertyRef Name="idPrioridad" />
+            </Principal>
+            <Dependent Role="soporte">
+              <PropertyRef Name="idPrioridad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soporte_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="soporte" Type="Self.soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="soporte">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="soporteModelStoreContainer">
+          <EntitySet Name="clasificacion" EntityType="Self.clasificacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estado" EntityType="Self.estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="perfil" EntityType="Self.perfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prioridad" EntityType="Self.prioridad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="soporte" EntityType="Self.soporte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_soporte_clasificacion" Association="Self.FK_soporte_clasificacion">
+            <End Role="clasificacion" EntitySet="clasificacion" />
+            <End Role="soporte" EntitySet="soporte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soporte_estado" Association="Self.FK_soporte_estado">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="soporte" EntitySet="soporte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soporte_perfil" Association="Self.FK_soporte_perfil">
+            <End Role="perfil" EntitySet="perfil" />
+            <End Role="soporte" EntitySet="soporte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soporte_prioridad" Association="Self.FK_soporte_prioridad">
+            <End Role="prioridad" EntitySet="prioridad" />
+            <End Role="soporte" EntitySet="soporte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soporte_usuario" Association="Self.FK_soporte_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="soporte" EntitySet="soporte" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="soporteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="clasificacion">
+          <Key>
+            <PropertyRef Name="idClasificacion" />
+          </Key>
+          <Property Name="idClasificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Clasificacion1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="soporte" Relationship="Self.FK_soporte_clasificacion" FromRole="clasificacion" ToRole="soporte" />
+        </EntityType>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estado1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="soporte" Relationship="Self.FK_soporte_estado" FromRole="estado" ToRole="soporte" />
+        </EntityType>
+        <EntityType Name="perfil">
+          <Key>
+            <PropertyRef Name="idPerfil" />
+          </Key>
+          <Property Name="idPerfil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Perfil1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="soporte" Relationship="Self.FK_soporte_perfil" FromRole="perfil" ToRole="soporte" />
+        </EntityType>
+        <EntityType Name="prioridad">
+          <Key>
+            <PropertyRef Name="idPrioridad" />
+          </Key>
+          <Property Name="idPrioridad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prioridad1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ValorPrioridad" Type="Int32" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="soporte" Relationship="Self.FK_soporte_prioridad" FromRole="prioridad" ToRole="soporte" />
+        </EntityType>
+        <EntityType Name="soporte">
+          <Key>
+            <PropertyRef Name="idSoporte" />
+          </Key>
+          <Property Name="idSoporte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPerfil" Type="Int32" />
+          <Property Name="idUsuario" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="idClasificacion" Type="Int32" />
+          <Property Name="idPrioridad" Type="Int32" />
+          <Property Name="Asunto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="HoraSoporte" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="idEstado" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="clasificacion" Relationship="Self.FK_soporte_clasificacion" FromRole="soporte" ToRole="clasificacion" />
+          <NavigationProperty Name="estado" Relationship="Self.FK_soporte_estado" FromRole="soporte" ToRole="estado" />
+          <NavigationProperty Name="perfil" Relationship="Self.FK_soporte_perfil" FromRole="soporte" ToRole="perfil" />
+          <NavigationProperty Name="prioridad" Relationship="Self.FK_soporte_prioridad" FromRole="soporte" ToRole="prioridad" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_soporte_usuario" FromRole="soporte" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="soporte" Relationship="Self.FK_soporte_usuario" FromRole="usuario" ToRole="soporte" />
+        </EntityType>
+        <Association Name="FK_soporte_clasificacion">
+          <End Role="clasificacion" Type="Self.clasificacion" Multiplicity="0..1" />
+          <End Role="soporte" Type="Self.soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clasificacion">
+              <PropertyRef Name="idClasificacion" />
+            </Principal>
+            <Dependent Role="soporte">
+              <PropertyRef Name="idClasificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soporte_estado">
+          <End Role="estado" Type="Self.estado" Multiplicity="0..1" />
+          <End Role="soporte" Type="Self.soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="soporte">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soporte_perfil">
+          <End Role="perfil" Type="Self.perfil" Multiplicity="0..1" />
+          <End Role="soporte" Type="Self.soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perfil">
+              <PropertyRef Name="idPerfil" />
+            </Principal>
+            <Dependent Role="soporte">
+              <PropertyRef Name="idPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soporte_prioridad">
+          <End Role="prioridad" Type="Self.prioridad" Multiplicity="0..1" />
+          <End Role="soporte" Type="Self.soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="prioridad">
+              <PropertyRef Name="idPrioridad" />
+            </Principal>
+            <Dependent Role="soporte">
+              <PropertyRef Name="idPrioridad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soporte_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="soporte" Type="Self.soporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="soporte">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="soporteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="clasificacion" EntityType="Self.clasificacion" />
+          <EntitySet Name="estado" EntityType="Self.estado" />
+          <EntitySet Name="perfil" EntityType="Self.perfil" />
+          <EntitySet Name="prioridad" EntityType="Self.prioridad" />
+          <EntitySet Name="soporte" EntityType="Self.soporte" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <AssociationSet Name="FK_soporte_clasificacion" Association="Self.FK_soporte_clasificacion">
+            <End Role="clasificacion" EntitySet="clasificacion" />
+            <End Role="soporte" EntitySet="soporte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soporte_estado" Association="Self.FK_soporte_estado">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="soporte" EntitySet="soporte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soporte_perfil" Association="Self.FK_soporte_perfil">
+            <End Role="perfil" EntitySet="perfil" />
+            <End Role="soporte" EntitySet="soporte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soporte_prioridad" Association="Self.FK_soporte_prioridad">
+            <End Role="prioridad" EntitySet="prioridad" />
+            <End Role="soporte" EntitySet="soporte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soporte_usuario" Association="Self.FK_soporte_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="soporte" EntitySet="soporte" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="soporteModelStoreContainer" CdmEntityContainer="soporteEntities">
+          <EntitySetMapping Name="clasificacion">
+            <EntityTypeMapping TypeName="soporteModel.clasificacion">
+              <MappingFragment StoreEntitySet="clasificacion">
+                <ScalarProperty Name="idClasificacion" ColumnName="idClasificacion" />
+                <ScalarProperty Name="Clasificacion1" ColumnName="Clasificacion" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estado">
+            <EntityTypeMapping TypeName="soporteModel.estado">
+              <MappingFragment StoreEntitySet="estado">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="Estado1" ColumnName="Estado" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="perfil">
+            <EntityTypeMapping TypeName="soporteModel.perfil">
+              <MappingFragment StoreEntitySet="perfil">
+                <ScalarProperty Name="idPerfil" ColumnName="idPerfil" />
+                <ScalarProperty Name="Perfil1" ColumnName="Perfil" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prioridad">
+            <EntityTypeMapping TypeName="soporteModel.prioridad">
+              <MappingFragment StoreEntitySet="prioridad">
+                <ScalarProperty Name="idPrioridad" ColumnName="idPrioridad" />
+                <ScalarProperty Name="Prioridad1" ColumnName="Prioridad" />
+                <ScalarProperty Name="ValorPrioridad" ColumnName="ValorPrioridad" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="soporte">
+            <EntityTypeMapping TypeName="soporteModel.soporte">
+              <MappingFragment StoreEntitySet="soporte">
+                <ScalarProperty Name="idSoporte" ColumnName="idSoporte" />
+                <ScalarProperty Name="idPerfil" ColumnName="idPerfil" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="idClasificacion" ColumnName="idClasificacion" />
+                <ScalarProperty Name="idPrioridad" ColumnName="idPrioridad" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="HoraSoporte" ColumnName="HoraSoporte" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="soporteModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Usuario1" ColumnName="Usuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
